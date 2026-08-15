@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NZWalks.API.CustomActionFilters;
 using NZWalks.API.Models.Domain;
 using NZWalks.API.Models.DTO;
 using NZWalks.API.Repository;
+using System.ComponentModel.DataAnnotations;
 
 namespace NZWalks.API.Controllers
 {
@@ -22,8 +24,12 @@ namespace NZWalks.API.Controllers
         }
 
         [HttpPost]
+        [ValidateModel]
         public async Task<IActionResult> Create([FromBody] AddWalksRequestDto addWalksRequestDto)
         {
+            // Validate the incoming request
+            //if(ModelState.IsValid == false) return BadRequest(ModelState);
+            
             // Dto to model
             var walkDomainMode =  mapper.Map<Walk>(addWalksRequestDto);
             await walkRepository.CreateAsync(walkDomainMode);
@@ -55,8 +61,12 @@ namespace NZWalks.API.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
+        [ValidateModel]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateWalkRequestDto updateWalkRequestDto)
         {
+            // Validate the incoming request
+            //if(ModelState.IsValid==false) return BadRequest(ModelState);
+
             // DTO To model 
             var walkDomainModel = mapper.Map<Walk>(updateWalkRequestDto);
 
