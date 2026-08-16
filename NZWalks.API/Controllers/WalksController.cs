@@ -36,10 +36,14 @@ namespace NZWalks.API.Controllers
             return Ok(mapper.Map<WalkDto>(walkDomainMode));
         }
 
+
+        //api/walks?filterOn=name&filterQuery=Track&sortBy=name&isAssending=true&pageNumber=1&pageSize=10
         [HttpGet]
-        public async Task<IActionResult> GetWalk()
+        public async Task<IActionResult> GetWalk([FromQuery] string? filterOn , [FromQuery] string? filterQuery , 
+            [FromQuery] string? sortOn , [FromQuery] bool? isAssending , 
+            [FromQuery] int pageNumber = 1 , [FromQuery] int pageSize = 10 )
         {
-            var walksDomainModel = await walkRepository.GetAllAsync();
+            var walksDomainModel = await walkRepository.GetAllAsync(filterOn, filterQuery, sortOn, isAssending ?? true , pageNumber, pageSize);
             
             return Ok(mapper.Map<List<WalkDto>>(walksDomainModel));
         }
