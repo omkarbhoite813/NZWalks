@@ -34,7 +34,7 @@ namespace NZWalks.API.Controllers
 
         // GET : Get Method 
         [HttpGet]
-        [Authorize(Roles ="Reader")]
+        //[Authorize(Roles ="Reader")]
         public async  Task<IActionResult> GetAll()
         {
             //----Logger
@@ -64,7 +64,7 @@ namespace NZWalks.API.Controllers
         // GET : Get Method by Id
         [HttpGet]
         [Route("{id:Guid}")]
-        [Authorize(Roles = "Reader")]
+        //[Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             //-----Get Data from Database - Domain Model 
@@ -93,7 +93,7 @@ namespace NZWalks.API.Controllers
         //POST : Create Method
         [HttpPost]
         [ValidateModel]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> Create([FromBody] AddRegionRequestDto addRegionRequestDto)
         {
             //-----Validate the Request
@@ -132,7 +132,7 @@ namespace NZWalks.API.Controllers
         //Delete : Delete Method
         [HttpDelete]
         [Route("{id:Guid}")]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             //-----Get DAta from Database 
@@ -161,7 +161,7 @@ namespace NZWalks.API.Controllers
         [HttpPut]
         [Route("{id:Guid}")]
         [ValidateModel]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> Update([FromRoute] Guid id , [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
         {
             //-----Validate the Request
